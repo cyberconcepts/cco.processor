@@ -14,7 +14,6 @@ from cco.processor.base import Error, error, _invalid, _not_found
 logger = getLogger('cco.processor.transformer')
 
 
-
 def transform(sdata, fmap, context=None):
     tdata = {}
     for tname, spec in fmap.items():

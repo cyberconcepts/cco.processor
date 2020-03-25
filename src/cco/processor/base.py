@@ -31,6 +31,13 @@ _invalid = object()
 
 # access to persistent objects
 
+def create_or_update_object(context, type_name, data):
+    obj = get_object(context, type_name, data)
+    if obj is None:
+        return create_object(context, type_name, data)
+    else:
+        return update_object(obj, data)
+
 def create_object(context, type_name, data, includeOnly=None):
     logCreate = data.get('_log_create', True)
     ident = data.get('_identifier')
