@@ -6,7 +6,9 @@
 Transform a data structure (represented by a dictionary )
 """
 
+from datetime import date
 from logging import getLogger
+import time
 import traceback
 
 from cco.processor.base import Error, error, _invalid, _not_found
@@ -73,3 +75,7 @@ def float_inv(val):
         return _invalid
     return float(val)
 
+def iso_date(val, context=None, format='%Y-%m-%d'):
+    if isinstance(val, basestring) and val == '':
+        return _invalid
+    return date(*(time.strptime(val, format)[:3]))
