@@ -11,7 +11,7 @@ from logging import getLogger
 import time
 import traceback
 
-from cco.processor.base import Error, error, _invalid, _not_found
+from cco.processor.common import Error, error, _invalid, _not_found
 
 logger = getLogger('cco.processor.transformer')
 

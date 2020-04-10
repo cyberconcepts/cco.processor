@@ -1,5 +1,5 @@
 #
-# cco.processor.base
+# cco.processor.storage
 #
 
 from logging import getLogger
@@ -9,24 +9,9 @@ from loops.common import adapted, baseObject
 from loops.concept import Concept
 from loops.setup import addAndConfigureObject
 
-logger = getLogger('cco.processor.base')
+from cco.processor.common import Error, _invalid
 
-
-class Error(object):
-
-    def __init__(self, msg):
-        self.message = msg
-
-    def __str__(self):
-        return '<Error %r>' % self.message
-
-    __repr__ = __str__
-
-def error(msg):
-    return Error(msg)
-
-_not_found = object()
-_invalid = object()
+logger = getLogger('cco.processor.storage')
 
 
 # access to persistent objects
