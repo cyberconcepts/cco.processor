@@ -19,6 +19,9 @@ logger = getLogger('cco.processor.transformer')
 def transform(sdata, fmap, context=None):
     tdata = {}
     for tname, spec in fmap.items():
+        if spec is None:
+            tdata[tname] = None
+            continue
         if isinstance(spec, str):
             sname, modif = spec, None
         else:
@@ -31,8 +34,9 @@ def transform(sdata, fmap, context=None):
         else:
             svalue = sdata.get(sname, _not_found)
             if svalue is _not_found:
-                tdata[tname] = error('transform: not found: %s' % sname)
-                continue
+                #tdata[tname] = error('transform: not found: %s' % sname)
+                #continue
+                svalue = None
         if modif is None:
             tvalue = svalue
         else:
@@ -66,16 +70,24 @@ def const(val):
     return lambda x: val
 
 def int_inv(val):
+    if val is None:
+        return None
     if isinstance(val, basestring) and val == '':
         return _invalid
     return int(val)
 
 def float_inv(val):
+    if val is None:
+        return None
     if isinstance(val, basestring) and val == '':
         return _invalid
     return float(val)
 
 def iso_date(val, context=None, format='%Y-%m-%d'):
+    if val is None:
+        return None
+    if isinstance(val, date):
+        return val
     if isinstance(val, basestring) and val == '':
         return _invalid
-    return date(*(time.strptime(val, format)[:3]))
+    return date(*(time.strptime(val[:10], format)[:3]))

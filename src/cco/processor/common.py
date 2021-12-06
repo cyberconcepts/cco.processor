@@ -20,6 +20,8 @@ class Error(object):
 def error(msg):
     return Error(msg)
 
+# TODO: create a class (with __repr__() method) for _not_found and _invalid
+
 _not_found = object()
 _invalid = object()
 
