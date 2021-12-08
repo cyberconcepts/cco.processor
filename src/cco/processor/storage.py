@@ -27,7 +27,7 @@ def check_change(obj, attr, newValue, includeOnly=None, omit=[], updateEmpty=[])
     oldValue = None
     if obj is not None: # called from create_object
         oldValue = getattr(obj, attr)
-    if newValue == oldValue or (not oldValue and attr in updateEmpty):
+    if newValue == oldValue or (oldValue and attr in updateEmpty):
         return None
     return (attr, (oldValue, newValue))
 
